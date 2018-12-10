@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30" packages="de.sebastiankopp.scalog.client.appender">
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+		</Property>
+		<Property name="logdir">${sys:log.directory}</Property>
+	</Properties>
+	<Appenders>
+		<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}"/>
+		</Console>
+		<Kafka name="Kafka" topic="log-test">
+			<ScalogJsonLayout stacktraceAsString="true" />
+			<Property name="bootstrap.servers">localhost:9092,localhost:9093,localhost:9094</Property>
+			<Property name="group.id">test.dummy</Property>
+		</Kafka>
+	</Appenders>
+	<Loggers>
+		<Logger name="de.sebastiankopp.scalog.client.appender" level="debug">
+			<AppenderRef ref="Kafka"/>
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="ConsoleAppender"/>
+		</Root>
+	</Loggers>
+</Configuration>
