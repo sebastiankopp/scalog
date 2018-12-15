@@ -34,7 +34,7 @@ public class ElasticWriter extends ElasticClient {
 				.request()
 				.buildPut(entity(logMsgObject, APPLICATION_JSON))
 				.invoke();
-		return handleResponseError(response, () -> writeToIndex(logMsgObject, retries - 1), scalogLogMsgId);
+		return handleResponse(response, () -> writeToIndex(logMsgObject, retries - 1), scalogLogMsgId, retries);
 	}
 	
 	public void writeToIndex(final String logMsgAsJson) {

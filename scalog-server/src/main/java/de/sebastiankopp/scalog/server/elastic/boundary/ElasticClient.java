@@ -31,15 +31,14 @@ public abstract class ElasticClient {
 	}
 	
 	
-	protected void handleResponseError(Response response) {
-		handleResponseError(response, null, null);
+	protected void handleResponse(Response response) {
+		handleResponse(response, null, null, 0);
 	}
 	
-	protected <T> T handleResponseError(Response response, Callable<T> redoAction, T successRetVal) {
+	protected <T> T handleResponse(Response response, Callable<T> redoAction, T successRetVal, int retries) {
 		final Response.Status.Family statusFamily = response.getStatusInfo().getFamily();
 		if (statusFamily == CLIENT_ERROR || statusFamily == SERVER_ERROR) {
-			if (response.getStatus() == CONFLICT.getStatusCode()
-					&& redoAction != null) {
+			if (response.getStatus() == CONFLICT.getStatusCode() && redoAction != null && retries > 0) {
 				try {
 					return redoAction.call();
 				} catch (Exception e) {

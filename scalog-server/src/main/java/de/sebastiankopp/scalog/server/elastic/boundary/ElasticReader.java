@@ -23,7 +23,7 @@ public class ElasticReader extends ElasticClient {
 				.request(APPLICATION_JSON)
 				.buildGet()
 				.invoke();
-		handleResponseError(response);
+		handleResponse(response);
 		return response.readEntity(ObjectNode.class);
 	}
 	
