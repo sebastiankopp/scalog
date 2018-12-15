@@ -1,0 +1,6 @@
+= Scalog
+
+== Introduction
+Scalog is a simple p(r)oof of concept for a scalable logging solution in distributed application scenarios, based on
+Elasticsearch, Apache Kafka and Apache Log4j2.
+

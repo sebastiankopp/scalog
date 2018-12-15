@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.nio.file.Files;
@@ -26,7 +25,6 @@ import static java.util.Arrays.asList;
 import static java.util.UUID.randomUUID;
 import static org.apache.logging.log4j.LogManager.getLogger;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.testng.Assert.assertEquals;
 
@@ -43,9 +41,9 @@ public class ITScalogKafkaLogging {
 		properties.put("bootstrap.servers", "localhost:9092,localhost:9093,localhost:9094");
 		properties.put("key.deserializer", StringDeserializer.class.getName());
 		properties.put("value.deserializer", StringDeserializer.class.getName());
-		properties.put("group.id", "consumer--dummy");
+		properties.put("group.id", "scalog-test-listener");
 		consumer = new KafkaConsumer<>(properties);
-		consumer.subscribe(asList("log-test"));
+		consumer.subscribe(asList("scalogMsgs"));
 	}
 	
 	@Test

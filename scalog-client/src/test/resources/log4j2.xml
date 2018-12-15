@@ -10,10 +10,10 @@
 		<Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
 			<PatternLayout pattern="${LOG_PATTERN}"/>
 		</Console>
-		<Kafka name="Kafka" topic="log-test">
+		<Kafka name="Kafka" topic="scalogMsgs">
 			<ScalogJsonLayout stacktraceAsString="true" />
 			<Property name="bootstrap.servers">localhost:9092,localhost:9093,localhost:9094</Property>
-			<Property name="group.id">test.dummy</Property>
+			<Property name="group.id">scalog-aggregation</Property>
 		</Kafka>
 	</Appenders>
 	<Loggers>

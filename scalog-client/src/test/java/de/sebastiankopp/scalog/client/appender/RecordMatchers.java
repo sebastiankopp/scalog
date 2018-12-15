@@ -9,7 +9,6 @@ import java.util.function.Function;
 
 import static java.util.Objects.requireNonNull;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.theInstance;
 
 public class RecordMatchers {
 
